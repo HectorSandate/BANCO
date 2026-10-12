@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Test Anatomía Patológica – 3er Parcial</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f6f7f9;--card:#fff;--tx:#1b1f24;--mut:#6b7280;--bd:#d9dde3;--ac:#2563eb;--ok:#16a34a;--okb:#dcfce7;--ko:#dc2626;--kob:#fee2e2}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111418;--card:#1b2027;--tx:#e8eaed;--mut:#9aa3af;--bd:#333b46;--ac:#60a5fa;--ok:#4ade80;--okb:#12341f;--ko:#f87171;--kob:#3b1717}}
+:root[data-theme="dark"]{--bg:#111418;--card:#1b2027;--tx:#e8eaed;--mut:#9aa3af;--bd:#333b46;--ac:#60a5fa;--ok:#4ade80;--okb:#12341f;--ko:#f87171;--kob:#3b1717}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:640px;margin:0 auto;padding:16px}
+h1{font-size:18px;margin:0 0 12px}
+.bar{height:6px;background:var(--bd);border-radius:9px;overflow:hidden;margin:8px 0 14px}
+.bar i{display:block;height:100%;background:var(--ac);transition:width .3s}
+.meta{display:flex;justify-content:space-between;color:var(--mut);font-size:14px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px}
+.q{font-weight:600;margin:0 0 12px}
+.opt{display:block;width:100%;text-align:left;background:var(--card);color:var(--tx);border:1.5px solid var(--bd);border-radius:10px;padding:12px;margin:8px 0;font:inherit;cursor:pointer}
+.opt:active{transform:scale(.99)}
+.opt.ok{border-color:var(--ok);background:var(--okb)}
+.opt.ko{border-color:var(--ko);background:var(--kob)}
+.opt:disabled{cursor:default;color:var(--tx)}
+.btn{background:var(--ac);color:#fff;border:0;border-radius:10px;padding:12px 18px;font:inherit;font-weight:600;cursor:pointer;margin-top:10px}
+.btn.alt{background:transparent;color:var(--ac);border:1.5px solid var(--ac)}
+.big{font-size:44px;font-weight:700;text-align:center;margin:8px 0}
+.rev{border-top:1px solid var(--bd);padding:10px 0;font-size:15px}
+.rev b{color:var(--ok)}.rev s{color:var(--ko)}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+</style></head><body><main>
+<h1>🧬 Anatomía Patológica · 3er Parcial</h1>
+<div id="app"></div>
+</main>
+<script>
+const Q=[
+["Las secreciones gástricas en 24 horas corresponden a:",["1500 ML","2000 ML","2500 ML","3000 ML"],2],
+["Hormona que inhibe la motilidad y la secreción intestinal:",["Somatostatina","Secretina","Motilina","Péptido YY"],3],
+["Qué célula intestinal produce la colecistocinina:",["Célula D","Célula S","Célula I","Célula M"],2],
+["Qué hormona estimula la secreción pancreatina y biliar:",["Neurotensina","Péptido YY","Colecistocinina","Secretina"],0],
+["Qué cromosoma afecta la enfermedad de Crohn:",["Cromosoma 15","Cromosoma 16","Cromosoma 17","Cromosoma 18"],1],
+["Manifestación urológica extraintestinal de la enfermedad de Crohn:",["Vasculitis","Cistitis","Obstrucción ureteral","Pielonefritis"],2],
+["A qué porcentaje de la población afecta el divertículo de Meckel:",["2%","12%","22%","32%"],0],
+["Las fístulas entéricas iatrogenias se manifiestan clínicamente a partir de qué día:",["5°","11°","15°","3°"],0],
+["El tratamiento médico para la pancolitis leve a moderada en el CUCI es a base de:",["Enemas jabonosos","Esteroides sistémicos","Mesalasina","Prednisona IV"],2],
+["Corresponde a la existencia de divertículos en el colon sin inflamación:",["Diverticulosis","Diverticulitis","Estreñimiento","Hematoquecia"],0],
+["Sitio anatómico más frecuente en el que se encuentran los divertículos de colon:",["Colon ascendente","Colon transverso","Colon descendente","Sigmoides"],3],
+["En la clasificación de Hichey la peritonitis purulenta corresponde a:",["I","II","III","IV"],2],
+["El conducto anal distal deriva del:",["Endodermo","Mesodermo","Ectodermo","Todas son correctas"],2],
+["El esfínter anal y el puborrectal son inervados por:",["Plexo hipogástrico","S2 a S4","Nervio pudendo","Plexo preaórtico"],2],
+["Cuántos paquetes vasculares hemorroidales se encuentran en el lado derecho:",["1","2","3","4"],1],
+["En qué grado las venas hemorroidales se propasan y necesitan reducción manual:",["Grado I","Grado II","Grado III","Grado IV"],2],
+["Causa intrahepática de ictericia:",["Hemólisis","Sx de Gilbert","Colelitiasis","Colangiocarcinoma"],1],
+["Qué porcentaje del gasto cardiaco recibe el hígado:",["10%","15%","20%","25%"],3],
+["En la escala de lesión hepática cuál corresponde a un desgarro cápsula de 2 cm de profundidad y 9 cm de largo:",["Grado I","Grado II","Grado III","Grado IV"],1],
+["Corresponde a la oclusión temporal del ligamento hepatoduodenal:",["Langenbuch","Kocher","Pringle","Mattox"],2],
+["Cuál de las siguientes vitaminas se facilita su absorción por la bilis:",["Vitamina B12","Vitamina B1","Vitamina C","Vitamina K"],3],
+["En qué parte del intestino se absorbe el 80% de la bilis:",["Duodeno","Yeyuno","Íleon","Colon"],2],
+["La arteria cística es rama de la:",["Hepática derecha","Hepática izquierda","Hepática común","Gástrica izquierda"],0],
+["Los cálculos biliares relacionados con hemólisis y cirrosis:",["Colesterol","Negros","Pardos","Todos son correctos"],1],
+["La obstrucción de la vía biliar suele producir lo siguiente excepto:",["Aumento de bilirrubina conjugada","Aumento de la fosfatasa alcalina","Disminución de TGO","Aumento de TGO"],2],
+["Estudio gold estándar en la coledocolitiasis:",["TAC abdomen","Ultrasonido","Colangiorresonancia","Gammagrama"],2],
+["Cuáles de los siguientes signos no corresponde a la tríada de Charcot:",["Fiebre","Dolor en CSD","Ictericia","Alteraciones del estado mental"],3],
+["Cuántas válvulas de Houston existen:",["1","2","3","4"],2],
+["Cuál de los esfínteres anales da el control voluntario:",["Esfínter anal interno","Esfínter anal externo","Ambos son iguales","Ninguno"],1],
+["La irrigación arterial del recto a través de la hemorroidal inferior proviene de:",["Pudenda interna","Pudenda externa","Hipogástrica","Mesentérica inferior"],0],
+["Los abscesos perianales se presentan más frecuentes en:",["Perineal","Isquirectal","Supraelevador","Postanal profundo"],0]
+];
+const app=document.getElementById("app");
+let order,i,score,wrong,answered;
+const shuf=a=>{a=a.slice();for(let k=a.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[a[k],a[j]]=[a[j],a[k]]}return a};
+function start(onlyWrong){
+  order=onlyWrong?wrong.slice():shuf(Q.map((_,k)=>k));
+  order=shuf(order);i=0;score=0;wrong=[];answered=false;
+  show();
+}
+function menu(){
+  app.innerHTML=`<div class="card"><p class="q">${Q.length} preguntas de opción múltiple. Toca una respuesta para ver si es correcta.</p>
+  <button class="btn" onclick="start(false)">Empezar test</button></div>`;
+}
+function show(){
+  const n=order[i],[t,o]=Q[n];answered=false;
+  app.innerHTML=`<div class="meta"><span>Pregunta ${i+1} de ${order.length}</span><span>Aciertos: ${score}</span></div>
+  <div class="bar"><i style="width:${i/order.length*100}%"></i></div>
+  <div class="card"><p class="q">${t}</p>${o.map((x,k)=>`<button class="opt" data-k="${k}">${"ABCD"[k]}) ${x}</button>`).join("")}
+  <div id="nx"></div></div>`;
+  app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>pick(+b.dataset.k));
+}
+function pick(k){
+  if(answered)return;answered=true;
+  const n=order[i],c=Q[n][2];
+  if(k===c)score++;else wrong.push(n);
+  app.querySelectorAll(".opt").forEach((b,j)=>{b.disabled=true;if(j===c)b.classList.add("ok");else if(j===k)b.classList.add("ko")});
+  const last=i===order.length-1;
+  document.getElementById("nx").innerHTML=`<button class="btn" id="go">${last?"Ver resultado":"Siguiente"}</button>`;
+  document.getElementById("go").onclick=()=>{if(last)end();else{i++;show()}};
+}
+function end(){
+  const p=Math.round(score/order.length*100);
+  app.innerHTML=`<div class="card"><div class="big">${score}/${order.length}</div>
+  <p style="text-align:center;margin:0 0 8px">${p}% de aciertos ${p>=80?"🎉":p>=60?"👍":"📚"}</p>
+  <div class="row" style="justify-content:center">
+  ${wrong.length?`<button class="btn" onclick="start(true)">Repetir falladas (${wrong.length})</button>`:""}
+  <button class="btn alt" onclick="start(false)">Nuevo intento</button></div>
+  ${wrong.length?`<h3 style="margin:18px 0 4px">Para repasar</h3>`+wrong.map(n=>`<div class="rev">${Q[n][0]}<br><b>✔ ${Q[n][1][Q[n][2]]}</b></div>`).join(""):""}</div>`;
+  window._w=wrong.slice();
+}
+menu();
+</script></body></html>
